@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  /* Font */
+  --font-sans: 'Inter', sans-serif;
+
+  /* Colors — point to your CSS vars */
+  --color-accent:       var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-bg:           var(--bg);
+  --color-surface:      var(--bg-surface);
+  --color-elevated:     var(--bg-elevated);
+  --color-border:       var(--border);
+  --color-text:         var(--text);
+  --color-muted:        var(--text-muted);
+  --color-icon:         var(--icon-fill);
+
+  /* Shadows */
+  --shadow-nav:      var(--shadow);
+  --shadow-dropdown: var(--shadow-dropdown);
+
+  /* Border radius */
+  --radius-theme: 10px;
+
+  /* Height */
+  --height-nav: 64px;
+
+  /* Max width */
+  --max-width-layout: 1280px;
+
+  /* Font sizes */
+  --text-2xs:    0.75rem;
+  --text-sm15:   0.8125rem;
+  --text-base15: 0.875rem;
+  --text-md:     0.9375rem;
+
+  /* Spacing */
+  --spacing-4_5: 1.125rem;
+}
+
+/* ── CSS custom properties (theming) ── */
+:root,
+[data-theme="light"] {
+  font-size: 16px;
+	--accent: rgb(27 86 253);
+	--accent-hover: rgb(20 69 212);
+	--accent-ring: rgba(27, 86, 253, 0.12);
+	--bg: #ffffff;
+	--bg-surface: #f4f6fb;
+	--bg-elevated: #ffffff;
+	--border: #e2e6f0;
+	--text: #0f1623;
+	--text-muted: #6b7280;
+	--icon-fill: #374151;
+	--shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 4px 16px rgba(0, 0, 0, .06);
+	--shadow-dropdown: 0 8px 32px rgba(0, 0, 0, .12);
+}
+
+[data-theme="dark"] {
+	--accent: rgb(77 123 253);
+	--accent-hover: rgb(107 147 254);
+	--accent-ring: rgba(77, 123, 253, 0.15);
+	--bg: #0d1117;
+	--bg-surface: #161b24;
+	--bg-elevated: #1c2333;
+	--border: #2a3244;
+	--text: #e6eaf2;
+	--text-muted: #8b95a8;
+	--icon-fill: #c9d1e0;
+	--shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 4px 16px rgba(0, 0, 0, .3);
+	--shadow-dropdown: 0 8px 32px rgba(0, 0, 0, .45);
+}
+
+@media (prefers-color-scheme: dark) {
+	[data-theme="system"] {
+		--accent: rgb(77 123 253);
+		--accent-hover: rgb(107 147 254);
+		--accent-ring: rgba(77, 123, 253, 0.15);
+		--bg: #0d1117;
+		--bg-surface: #161b24;
+		--bg-elevated: #1c2333;
+		--border: #2a3244;
+		--text: #e6eaf2;
+		--text-muted: #8b95a8;
+		--icon-fill: #c9d1e0;
+		--shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 4px 16px rgba(0, 0, 0, .3);
+		--shadow-dropdown: 0 8px 32px rgba(0, 0, 0, .45);
+	}
+}
+
+/* ── Logo SVG fill per theme ── */
+.logo-svg {
+	fill: #000;
+	transition: fill 0.2s ease;
+}
+
+[data-theme="dark"] .logo-svg {
+	fill: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+	[data-theme="system"] .logo-svg {
+		fill: #fff;
+	}
+}
+
+/* ── Search hover ring (needs CSS var, can't do in Tailwind inline) ── */
+.search-bar:hover {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+/* ── Theme dropdown animation states ── */
+.theme-dropdown {
+	opacity: 0;
+	transform: translateY(-6px) scale(0.97);
+	pointer-events: none;
+	transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.theme-dropdown.is-open {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+	pointer-events: all;
+}
+
+/* ── Mobile menu animation states ── */
+.mobile-menu {
+	transform: translateY(-8px);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.mobile-menu.is-open {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: all;
+}
+
+/* ── Active theme option tint ── */
+.theme-option.is-active {
+	color: var(--accent);
+	background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.theme-option.is-active .check-icon {
+	opacity: 1;
+}
+
+.mobile-theme-opt.is-active {
+	border-color: var(--accent);
+	color: var(--accent);
+	background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* ── Overlay ── */
+.overlay {
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease;
+}
+
+.overlay.is-open {
+	opacity: 1;
+	pointer-events: all;
+}
