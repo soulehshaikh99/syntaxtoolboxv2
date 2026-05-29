@@ -39,9 +39,12 @@
 }
 
 /* ── CSS custom properties (theming) ── */
+:root {    
+  font-size: 16px;
+}
+
 :root,
 [data-theme="light"] {
-  font-size: 16px;
 	--accent: rgb(27 86 253);
 	--accent-hover: rgb(20 69 212);
 	--accent-ring: rgba(27, 86, 253, 0.12);
