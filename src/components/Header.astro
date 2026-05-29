@@ -1,0 +1,165 @@
+  <!-- ── Nav ── -->
+  <header class="sticky top-0 z-50 h-nav bg-bg border-b border-border shadow-nav transition-colors duration-200">
+    <div class="max-w-layout mx-auto h-full px-6 flex items-center gap-4 max-md:px-4">
+
+      <!-- Brand -->
+      <a href="/" class="flex items-center gap-2.5 no-underline shrink-0 mr-1 max-md:mr-0" aria-label="Syntax Toolbox home">
+        <span class="w-[34px] h-[34px] grid place-items-center shrink-0" aria-hidden="true">
+          <svg class="logo-svg w-[34px] h-[34px] block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="5">
+            <path d="M123.269 256.225l134.981 158.81 162.995-191.782H312.298v-41.972h104.571 71.05 24.075L258.25 479.839 68.191 256.225h55.078zm-82.992-32.85L-.004 175.987 110.689 32.175H405.61l91.14 117.006h-53.198l-58.447-75.045H131.35L48.795 181.404h156.358v41.972H102.295 40.277zm196.971 115.269V148.95H114.323l32.766-41.779h223.248l32.766 41.779H279.224v189.694l-20.988 25.557-20.988-25.557z"/>
+          </svg>
+        </span>
+        <span class="text-base font-semibold text-text tracking-tight whitespace-nowrap max-[360px]:hidden">Syntax Toolbox</span>
+      </a>
+
+      <!-- Spacer -->
+      <div class="flex-1"></div>
+
+      <!-- Desktop nav links -->
+      <a href="/tools"     class="max-md:hidden p-2 text-md font-medium text-muted no-underline whitespace-nowrap shrink-0 transition-colors duration-200 hover:text-text">All Tools</a>
+      <a href="/changelog" class="max-md:hidden p-2 text-md font-medium text-muted no-underline whitespace-nowrap shrink-0 transition-colors duration-200 hover:text-text">Changelog</a>
+
+      <!-- Desktop: search + theme grouped -->
+      <div class="max-md:hidden flex items-center gap-2">
+
+        <!-- Search bar -->
+        <div class="search-bar flex items-center gap-2 h-[38px] px-3 bg-surface border border-border rounded-theme cursor-pointer transition-all duration-200 min-w-[240px] max-w-[280px] flex-1 select-none"
+             role="button" tabindex="0" aria-label="Search tools (Ctrl+K)" id="searchBtn">
+          <span class="text-muted shrink-0" aria-hidden="true">
+            <svg class="w-[15px] h-[15px] block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <span class="text-base15 text-muted flex-1 whitespace-nowrap">Search tools…</span>
+          <span class="flex items-center gap-0.5 shrink-0" aria-hidden="true">
+            <kbd class="inline-flex items-center justify-center h-5 px-[5px] bg-elevated border border-border rounded-[5px] font-sans text-2xs text-muted leading-none">Ctrl</kbd>
+            <kbd class="inline-flex items-center justify-center h-5 px-[5px] bg-elevated border border-border rounded-[5px] font-sans text-2xs text-muted leading-none">K</kbd>
+          </span>
+        </div>
+
+        <!-- Theme button -->
+        <div class="relative shrink-0" id="themeBtn">
+          <button class="flex items-center justify-center w-[38px] h-[38px] rounded-theme border border-border bg-surface text-icon cursor-pointer transition-all duration-200 hover:border-accent hover:text-accent hover:bg-elevated"
+                  aria-label="Change theme" aria-haspopup="true" aria-expanded="false" id="themeTrigger">
+            <svg id="themeIcon" class="w-[17px] h-[17px] pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </button>
+
+          <!-- Dropdown -->
+          <div class="theme-dropdown absolute top-[calc(100%+8px)] right-0 min-w-[150px] bg-elevated border border-border rounded-theme shadow-dropdown p-1.5 flex flex-col gap-0.5"
+               id="themeDropdown" role="menu">
+
+            <button class="theme-option flex items-center gap-2.5 px-2.5 py-2 rounded-[7px] text-base15 font-medium text-muted cursor-pointer border-none bg-transparent w-full text-left transition-all duration-200 hover:bg-surface hover:text-text"
+                    data-theme="light" role="menuitem">
+              <svg class="w-[15px] h-[15px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+              Light
+              <svg class="check-icon ml-auto opacity-0 text-accent w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+
+            <button class="theme-option flex items-center gap-2.5 px-2.5 py-2 rounded-[7px] text-base15 font-medium text-muted cursor-pointer border-none bg-transparent w-full text-left transition-all duration-200 hover:bg-surface hover:text-text"
+                    data-theme="dark" role="menuitem">
+              <svg class="w-[15px] h-[15px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+              Dark
+              <svg class="check-icon ml-auto opacity-0 text-accent w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+
+            <button class="theme-option flex items-center gap-2.5 px-2.5 py-2 rounded-[7px] text-base15 font-medium text-muted cursor-pointer border-none bg-transparent w-full text-left transition-all duration-200 hover:bg-surface hover:text-text"
+                    data-theme="system" role="menuitem">
+              <svg class="w-[15px] h-[15px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+              System
+              <svg class="check-icon ml-auto opacity-0 text-accent w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile: search icon + hamburger -->
+      <div class="hidden max-md:flex items-center gap-2">
+        <button class="flex items-center justify-center w-[38px] h-[38px] rounded-theme border border-border bg-surface text-icon cursor-pointer shrink-0 transition-all duration-200 hover:border-accent hover:text-accent"
+                id="searchIconBtn" aria-label="Search tools">
+          <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+
+        <button class="flex items-center justify-center w-[38px] h-[38px] rounded-theme border border-border bg-surface text-icon cursor-pointer shrink-0 transition-all duration-200 hover:border-accent hover:text-accent"
+                id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <svg id="hamburgerIcon" class="w-[18px] h-[18px] pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ── Mobile menu ── -->
+  <nav class="mobile-menu fixed top-[64px] left-0 right-0 z-40 bg-elevated border-b border-border shadow-dropdown px-4 pt-3 pb-5 flex flex-col gap-1"
+       id="mobileMenu" aria-label="Mobile navigation">
+
+    <a href="/tools" class="flex items-center gap-2.5 px-3 py-[11px] rounded-theme text-md font-medium text-muted no-underline transition-all duration-200 hover:bg-surface hover:text-text"
+       id="mobileMenuLink">
+      <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      All Tools
+    </a>
+    <a href="/changelog" class="flex items-center gap-2.5 px-3 py-[11px] rounded-theme text-md font-medium text-muted no-underline transition-all duration-200 hover:bg-surface hover:text-text"
+       id="mobileChangelogLink">
+      <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>
+      </svg>
+      Changelog
+    </a>
+
+    <div class="h-px bg-border my-1.5"></div>
+    <p class="text-2xs font-semibold text-muted uppercase tracking-[0.06em] px-3 py-1">Theme</p>
+
+    <div class="flex gap-1.5 px-1">
+      <button class="mobile-theme-opt flex-1 flex flex-col items-center gap-1.5 px-2 py-2.5 rounded-theme text-sm15 font-medium text-muted cursor-pointer border border-border bg-surface transition-all duration-200 hover:border-accent hover:text-accent"
+              data-theme="light">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        Light
+      </button>
+      <button class="mobile-theme-opt flex-1 flex flex-col items-center gap-1.5 px-2 py-2.5 rounded-theme text-sm15 font-medium text-muted cursor-pointer border border-border bg-surface transition-all duration-200 hover:border-accent hover:text-accent"
+              data-theme="dark">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        Dark
+      </button>
+      <button class="mobile-theme-opt flex-1 flex flex-col items-center gap-1.5 px-2 py-2.5 rounded-theme text-sm15 font-medium text-muted cursor-pointer border border-border bg-surface transition-all duration-200 hover:border-accent hover:text-accent"
+              data-theme="system">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        System
+      </button>
+    </div>
+  </nav>
+
+  <!-- Overlay -->
+  <div class="overlay fixed inset-0 z-30 bg-black/25" id="overlay"></div>
