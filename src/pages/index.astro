@@ -1,7 +1,5 @@
 ---
-import '../styles/global.css'
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
+import DefaultLayout from '../layouts/DefaultLayout.astro'
 ---
 
 <!DOCTYPE html>
@@ -15,20 +13,16 @@ import Footer from '../components/Footer.astro'
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body class="font-sans bg-surface text-text min-h-screen">
-
-  <Header />
-
-  <main class="flex flex-col items-center justify-center px-6 py-20 max-sm:py-12 gap-3 text-center">
-    <span class="inline-flex items-center gap-1.5 px-3 py-[5px] rounded-full text-sm15 font-semibold text-accent" style="background:color-mix(in srgb, var(--accent) 10%, transparent)">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      Nav component preview
-    </span>
-    <h1 class="text-[1.75rem] max-sm:text-[1.25rem] font-semibold tracking-[-0.03em] text-text">Syntax Toolbox</h1>
-    <p class="text-base text-muted max-w-[400px] leading-relaxed">Resize the window to see the responsive hamburger menu. Use the theme toggle in the top-right to switch between Light, Dark, and System modes.</p>
-  </main>
-
-  <Footer />
-
+  <DefaultLayout>
+    <main class="flex flex-col items-center justify-center px-6 py-20 max-sm:py-12 gap-3 text-center">
+      <span class="inline-flex items-center gap-1.5 px-3 py-[5px] rounded-full text-sm15 font-semibold text-accent" style="background:color-mix(in srgb, var(--accent) 10%, transparent)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Nav component preview
+      </span>
+      <h1 class="text-[1.75rem] max-sm:text-[1.25rem] font-semibold tracking-[-0.03em] text-text">Syntax Toolbox</h1>
+      <p class="text-base text-muted max-w-[400px] leading-relaxed">Resize the window to see the responsive hamburger menu. Use the theme toggle in the top-right to switch between Light, Dark, and System modes.</p>
+    </main>  
+  </DefaultLayout>
   <script>
     const html = document.documentElement;
     let currentTheme = localStorage.getItem('st-theme') || 'system';
