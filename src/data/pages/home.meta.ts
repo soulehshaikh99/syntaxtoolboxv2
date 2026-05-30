@@ -6,8 +6,11 @@ const publisher = {
 	url: site.home(),
 };
 
-export function getHomeSchema() {
-	return [
+export const homeMeta = {
+	title: "Syntax Toolbox - Free Online Calculators & Converters",
+	description: "Free online calculators, converters & tools - no signup needed. Simplify daily tasks instantly with Syntax Toolbox's growing collection of quality utilities.",
+	keywords: "free online calculators and converters, online tools free...",
+	schema: [
 		{
 			'@context': 'https://schema.org',
 			'@type': 'Organization',
@@ -167,5 +170,5 @@ export function getHomeSchema() {
 				},
 			],
 		},
-	];
+	]
 }
