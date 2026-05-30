@@ -1,28 +1,26 @@
 ---
 import DefaultLayout from '../layouts/DefaultLayout.astro'
+import { getHomeSchema } from '../data/schemas/home'
+
+const title = "Syntax Toolbox - Free Online Calculators & Converters"
+const description = "Free online calculators, converters & tools - no signup needed. Simplify daily tasks instantly with Syntax Toolbox's growing collection of quality utilities."
+const keywords = "free online calculators and converters, online tools free, free calculator online, unit converter online, productivity tools online, math calculator online, finance calculator free, everyday tools online, free utility tools, free online tools for everyday calculations, best free calculator and converter website, online tools no signup required, all in one calculator and converter tool, free web tools for students and professionals, quick unit converter and calculator online, online toolbox for daily tasks, free tools for math finance and unit conversion, Syntax Toolbox calculators and converters, best free online utilities for productivity"
 ---
 
-<!DOCTYPE html>
-<html lang="en" data-theme="system">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Syntax Toolbox — Navigation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-</head>
-<body class="font-sans bg-surface text-text min-h-screen">
-  <DefaultLayout>
-    <main class="flex flex-col items-center justify-center px-6 py-20 max-sm:py-12 gap-3 text-center">
-      <span class="inline-flex items-center gap-1.5 px-3 py-[5px] rounded-full text-sm15 font-semibold text-accent" style="background:color-mix(in srgb, var(--accent) 10%, transparent)">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        Nav component preview
-      </span>
-      <h1 class="text-[1.75rem] max-sm:text-[1.25rem] font-semibold tracking-[-0.03em] text-text">Syntax Toolbox</h1>
-      <p class="text-base text-muted max-w-[400px] leading-relaxed">Resize the window to see the responsive hamburger menu. Use the theme toggle in the top-right to switch between Light, Dark, and System modes.</p>
-    </main>  
-  </DefaultLayout>
+<DefaultLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  schema={getHomeSchema()}
+  >
+  <main class="flex flex-col items-center justify-center px-6 py-20 max-sm:py-12 gap-3 text-center">
+    <span class="inline-flex items-center gap-1.5 px-3 py-[5px] rounded-full text-sm15 font-semibold text-accent" style="background:color-mix(in srgb, var(--accent) 10%, transparent)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Nav component preview
+    </span>
+    <h1 class="text-[1.75rem] max-sm:text-[1.25rem] font-semibold tracking-[-0.03em] text-text">Syntax Toolbox</h1>
+    <p class="text-base text-muted max-w-[400px] leading-relaxed">Resize the window to see the responsive hamburger menu. Use the theme toggle in the top-right to switch between Light, Dark, and System modes.</p>
+  </main>  
   <script>
     const html = document.documentElement;
     let currentTheme = localStorage.getItem('st-theme') || 'system';
@@ -33,14 +31,20 @@ import DefaultLayout from '../layouts/DefaultLayout.astro'
       system:`<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>`
     };
 
-    function applyTheme(theme) {
-      currentTheme = theme;
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('st-theme', theme);
-      document.getElementById('themeIcon').innerHTML = ICONS[theme];
-      document.querySelectorAll('.theme-option').forEach(b => b.classList.toggle('is-active', b.dataset.theme === theme));
-      document.querySelectorAll('.mobile-theme-opt').forEach(b => b.classList.toggle('is-active', b.dataset.theme === theme));
-    }
+	function applyTheme(theme) {
+		currentTheme = theme;
+		html.setAttribute('data-theme', theme);
+		localStorage.setItem('st-theme', theme);
+		document.getElementById('themeIcon').innerHTML = ICONS[theme];
+		document.querySelectorAll('.theme-option').forEach(b => b.classList.toggle('is-active', b.dataset.theme === theme));
+		document.querySelectorAll('.mobile-theme-opt').forEach(b => b.classList.toggle('is-active', b.dataset.theme === theme));
+
+		// Update theme-color meta
+		const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+		const isDark = theme === 'dark' ||
+			(theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+		themeColorMeta.setAttribute('content', isDark ? '#0d1117' : '#ffffff');
+	}
 
     applyTheme(currentTheme);
 
@@ -96,5 +100,4 @@ import DefaultLayout from '../layouts/DefaultLayout.astro'
     document.getElementById('searchBtn').addEventListener('click', () => console.log('Search — wire up modal here.'));
     document.getElementById('searchIconBtn').addEventListener('click', () => console.log('Mobile search — wire up modal here.'));
   </script>
-</body>
-</html>
+</DefaultLayout>
