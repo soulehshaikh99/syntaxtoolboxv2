@@ -9,7 +9,7 @@ const publisher = {
 export const homeMeta = {
 	title: "Syntax Toolbox - Free Online Calculators & Converters",
 	description: "Free online calculators, converters & tools - no signup needed. Simplify daily tasks instantly with Syntax Toolbox's growing collection of quality utilities.",
-	keywords: "free online calculators and converters, online tools free...",
+	keywords: "free online calculators and converters, online tools free, free calculator online, unit converter online, productivity tools online, math calculator online, finance calculator free, everyday tools online, free utility tools, free online tools for everyday calculations, best free calculator and converter website, online tools no signup required, all in one calculator and converter tool, free web tools for students and professionals, quick unit converter and calculator online, online toolbox for daily tasks, free tools for math finance and unit conversion, Syntax Toolbox calculators and converters, best free online utilities for productivity",
 	schema: [
 		{
 			'@context': 'https://schema.org',
