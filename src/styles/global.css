@@ -1,171 +1,364 @@
-@import "tailwindcss";
+/* ============================================================
+   IMPORTS
+   ============================================================ */
+   @import "tailwindcss";
+   @import "tw-animate-css";
+   @import "shadcn/tailwind.css";
+   @import "@fontsource-variable/inter";
+   
+   
+   /* ============================================================
+      DARK MODE VARIANT
+      Responds to both .dark class (shadcn) and data-theme attribute
+      (your theme toggle system) — so dark: utilities work with both.
+      ============================================================ */
+   @custom-variant dark (
+     &:is(.dark *),
+     &:is([data-theme="dark"] *),
+     &:is([data-theme="system"] *)
+   );
+   
+   
+   /* ============================================================
+      TAILWIND THEME
+      Only non-shadcn tokens that have no shadcn equivalent.
+      Everything else is handled via shadcn tokens below.
+      ============================================================ */
+   @theme {
+     /* Font */
+     --font-sans: 'Inter Variable', sans-serif;
+   
+     /* Shadows — no shadcn equivalent */
+     --shadow-nav:      var(--shadow);
+     --shadow-dropdown: var(--shadow-dropdown);
+   
+     /* Layout */
+     --radius-theme:      10px;
+     --height-nav:        64px;
+     --max-width-layout:  1280px;
+   
+     /* Custom font sizes */
+     --text-xxs: 0.625rem;                        /* 10px */
+     --text-xxs--line-height: calc(0.75 / 0.625); /* 12px ÷ 16 = 0.75rem */
+     --text-xs-plus: 0.8125rem;                        /* 13px */
+     --text-xs-plus--line-height: calc(1.125 / 0.8125); /* 18px ÷ 16 = 1.125rem */
+     --text-sm-plus: 0.9375rem;                        /* 15px */
+     --text-sm-plus--line-height: calc(1.375 / 0.9375); /* 22px ÷ 16 = 1.375rem */
+   }
+   
+   
+   /* ============================================================
+      SHADCN THEME INLINE — maps CSS vars to Tailwind utilities.
+      e.g. bg-background, text-foreground, text-muted-foreground
+      Leave this block alone — shadcn owns it and may update it.
+      ============================================================ */
+   @theme inline {
+     --font-heading:                      var(--font-sans);
+     --font-sans:                         'Inter Variable', sans-serif;
+   
+     --color-background:                  var(--background);
+     --color-foreground:                  var(--foreground);
+     --color-card:                        var(--card);
+     --color-card-foreground:             var(--card-foreground);
+     --color-popover:                     var(--popover);
+     --color-popover-foreground:          var(--popover-foreground);
+     --color-primary:                     var(--primary);
+     --color-primary-foreground:          var(--primary-foreground);
+     --color-secondary:                   var(--secondary);
+     --color-secondary-foreground:        var(--secondary-foreground);
+     --color-muted:                       var(--muted);
+     --color-muted-foreground:            var(--muted-foreground);
+     --color-accent:                      var(--accent);
+     --color-accent-foreground:           var(--accent-foreground);
+     --color-destructive:                 var(--destructive);
+     --color-border:                      var(--border);
+     --color-input:                       var(--input);
+     --color-ring:                        var(--ring);
+     --color-chart-1:                     var(--chart-1);
+     --color-chart-2:                     var(--chart-2);
+     --color-chart-3:                     var(--chart-3);
+     --color-chart-4:                     var(--chart-4);
+     --color-chart-5:                     var(--chart-5);
+     --color-sidebar:                     var(--sidebar);
+     --color-sidebar-foreground:          var(--sidebar-foreground);
+     --color-sidebar-primary:             var(--sidebar-primary);
+     --color-sidebar-primary-foreground:  var(--sidebar-primary-foreground);
+     --color-sidebar-accent:              var(--sidebar-accent);
+     --color-sidebar-accent-foreground:   var(--sidebar-accent-foreground);
+     --color-sidebar-border:              var(--sidebar-border);
+     --color-sidebar-ring:                var(--sidebar-ring);
+   
+     --radius-sm:  calc(var(--radius) * 0.6);
+     --radius-md:  calc(var(--radius) * 0.8);
+     --radius-lg:  var(--radius);
+     --radius-xl:  calc(var(--radius) * 1.4);
+     --radius-2xl: calc(var(--radius) * 1.8);
+     --radius-3xl: calc(var(--radius) * 2.2);
+     --radius-4xl: calc(var(--radius) * 2.6);
+   }
 
-@theme {
-  /* Font */
-  --font-sans: 'Inter', sans-serif;
-
-  /* Colors — point to your CSS vars */
-  --color-accent:       var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-bg:           var(--bg);
-  --color-surface:      var(--bg-surface);
-  --color-elevated:     var(--bg-elevated);
-  --color-border:       var(--border);
-  --color-text:         var(--text);
-  --color-muted:        var(--text-muted);
-  --color-icon:         var(--icon-fill);
-
-  /* Shadows */
-  --shadow-nav:      var(--shadow);
-  --shadow-dropdown: var(--shadow-dropdown);
-
-  /* Border radius */
-  --radius-theme: 10px;
-
-  /* Height */
-  --height-nav: 64px;
-
-  /* Max width */
-  --max-width-layout: 1280px;
-
-  /* Font sizes */
-  --text-2xs:    0.75rem;
-  --text-sm15:   0.8125rem;
-  --text-base15: 0.875rem;
-  --text-md:     0.9375rem;
-}
-
-/* ── CSS custom properties (theming) ── */
-:root {    
-  font-size: 16px;
-}
-
-:root,
-[data-theme="light"] {
-	--accent: rgb(27 86 253);
-	--accent-hover: rgb(20 69 212);
-	--accent-ring: rgba(27, 86, 253, 0.12);
-	--bg: #ffffff;
-	--bg-surface: #f4f6fb;
-	--bg-elevated: #ffffff;
-	--border: #e2e6f0;
-	--text: #0f1623;
-	--text-muted: #6b7280;
-	--icon-fill: #374151;
-	--shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 4px 16px rgba(0, 0, 0, .06);
-	--shadow-dropdown: 0 8px 32px rgba(0, 0, 0, .12);
-}
-
-[data-theme="dark"] {
-	--accent: rgb(77 123 253);
-	--accent-hover: rgb(107 147 254);
-	--accent-ring: rgba(77, 123, 253, 0.15);
-	--bg: #0d1117;
-	--bg-surface: #161b24;
-	--bg-elevated: #1c2333;
-	--border: #2a3244;
-	--text: #e6eaf2;
-	--text-muted: #8b95a8;
-	--icon-fill: #c9d1e0;
-	--shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 4px 16px rgba(0, 0, 0, .3);
-	--shadow-dropdown: 0 8px 32px rgba(0, 0, 0, .45);
-}
-
-@media (prefers-color-scheme: dark) {
-	[data-theme="system"] {
-		--accent: rgb(77 123 253);
-		--accent-hover: rgb(107 147 254);
-		--accent-ring: rgba(77, 123, 253, 0.15);
-		--bg: #0d1117;
-		--bg-surface: #161b24;
-		--bg-elevated: #1c2333;
-		--border: #2a3244;
-		--text: #e6eaf2;
-		--text-muted: #8b95a8;
-		--icon-fill: #c9d1e0;
-		--shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 4px 16px rgba(0, 0, 0, .3);
-		--shadow-dropdown: 0 8px 32px rgba(0, 0, 0, .45);
-	}
-}
-
-/* ── Logo SVG fill per theme ── */
-.logo-svg {
-	fill: #000;
-	transition: fill 0.2s ease;
-}
-
-[data-theme="dark"] .logo-svg {
-	fill: #fff;
-}
-
-@media (prefers-color-scheme: dark) {
-	[data-theme="system"] .logo-svg {
-		fill: #fff;
-	}
-}
-
-/* ── Search hover ring (needs CSS var, can't do in Tailwind inline) ── */
-.search-bar:hover {
-	border-color: var(--accent);
-	box-shadow: 0 0 0 3px var(--accent-ring);
-}
-
-/* ── Theme dropdown animation states ── */
-.theme-dropdown {
-	opacity: 0;
-	transform: translateY(-6px) scale(0.97);
-	pointer-events: none;
-	transition: opacity 0.15s ease, transform 0.15s ease;
-}
-
-.theme-dropdown.is-open {
-	opacity: 1;
-	transform: translateY(0) scale(1);
-	pointer-events: all;
-}
-
-/* ── Mobile menu animation states ── */
-.mobile-menu {
-	transform: translateY(-8px);
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.18s ease, transform 0.18s ease;
-}
-
-.mobile-menu.is-open {
-	opacity: 1;
-	transform: translateY(0);
-	pointer-events: all;
-}
-
-/* ── Active theme option tint ── */
-.theme-option.is-active {
-	color: var(--accent);
-	background: color-mix(in srgb, var(--accent) 10%, transparent);
-}
-
-.theme-option.is-active .check-icon {
-	opacity: 1;
-}
-
-.mobile-theme-opt.is-active {
-	border-color: var(--accent);
-	color: var(--accent);
-	background: color-mix(in srgb, var(--accent) 10%, transparent);
-}
-
-/* ── Overlay ── */
-.overlay {
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.2s ease;
-}
-
-.overlay.is-open {
-	opacity: 1;
-	pointer-events: all;
-}
-
-.footer-social:hover {
-	background: color-mix(in srgb, var(--accent) 6%, transparent);
-}
+   :root {
+    font-size: 16px;
+   }
+   
+   
+   /* ============================================================
+      LIGHT THEME — :root + [data-theme="light"]
+      Your brand values mapped directly into shadcn tokens.
+      Tailwind classes like bg-background, text-foreground,
+      text-muted-foreground, bg-muted, bg-accent etc. all
+      resolve to your brand colors automatically.
+   
+      Token mapping:
+        --background       = main page bg          (#ffffff)
+        --foreground       = main text             (#0f1623)
+        --muted            = subtle surface        (#f4f6fb)
+        --muted-foreground = secondary text        (#6b7280)
+        --accent           = brand blue            (rgb 27 86 253)
+        --accent-foreground= text on accent bg     (#ffffff)
+        --card             = elevated surface      (#ffffff)
+        --border           = border color          (#e2e6f0)
+        --popover          = dropdown bg           (#ffffff)
+      ============================================================ */
+   :root,
+   [data-theme="light"] {
+     /* ── Brand tokens (your design) ── */
+     --background:           #ffffff;
+     --foreground:           #0f1623;
+     --card:                 #ffffff;
+     --card-foreground:      #0f1623;
+     --popover:              #ffffff;
+     --popover-foreground:   #0f1623;
+     --muted:                #f4f6fb;
+     --muted-foreground:     #6b7280;
+     --accent:               rgb(27 86 253);
+     --accent-foreground:    #ffffff;
+     --border:               #e2e6f0;
+     --input:                #e2e6f0;
+     --ring:                 rgba(27, 86, 253, 0.3);
+   
+     /* ── shadcn semantic tokens ── */
+     --primary:              #0f1623;
+     --primary-foreground:   #ffffff;
+     --secondary:            #f4f6fb;
+     --secondary-foreground: #0f1623;
+     --destructive:          oklch(0.577 0.245 27.325);
+     --radius:               0.45rem;
+   
+     /* ── Extra brand tokens (used in component CSS below) ── */
+     --accent-hover:         rgb(20 69 212);
+     --accent-ring:          rgba(27, 86, 253, 0.12);
+     --icon-fill:            #374151;
+     --shadow:               0 1px 3px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.06);
+     --shadow-dropdown:      0 8px 32px rgba(0,0,0,.12);
+   
+     /* ── Chart ── */
+     --chart-1:              oklch(0.871 0.006 286.286);
+     --chart-2:              oklch(0.552 0.016 285.938);
+     --chart-3:              oklch(0.442 0.017 285.786);
+     --chart-4:              oklch(0.37 0.013 285.805);
+     --chart-5:              oklch(0.274 0.006 286.033);
+   
+     /* ── Sidebar ── */
+     --sidebar:                    #f4f6fb;
+     --sidebar-foreground:         #0f1623;
+     --sidebar-primary:            rgb(27 86 253);
+     --sidebar-primary-foreground: #ffffff;
+     --sidebar-accent:             #e2e6f0;
+     --sidebar-accent-foreground:  #0f1623;
+     --sidebar-border:             #e2e6f0;
+     --sidebar-ring:               rgba(27, 86, 253, 0.3);
+   }
+   
+   
+   /* ============================================================
+      DARK THEME — [data-theme="dark"] and .dark
+      ============================================================ */
+   [data-theme="dark"],
+   .dark {
+     /* ── Brand tokens ── */
+     --background:           #0d1117;
+     --foreground:           #e6eaf2;
+     --card:                 #1c2333;
+     --card-foreground:      #e6eaf2;
+     --popover:              #1c2333;
+     --popover-foreground:   #e6eaf2;
+     --muted:                #161b24;
+     --muted-foreground:     #8b95a8;
+     --accent:               rgb(77 123 253);
+     --accent-foreground:    #ffffff;
+     --border:               #2a3244;
+     --input:                #2a3244;
+     --ring:                 rgba(77, 123, 253, 0.3);
+   
+     /* ── shadcn semantic tokens ── */
+     --primary:              #e6eaf2;
+     --primary-foreground:   #0d1117;
+     --secondary:            #161b24;
+     --secondary-foreground: #e6eaf2;
+     --destructive:          oklch(0.704 0.191 22.216);
+   
+     /* ── Extra brand tokens ── */
+     --accent-hover:         rgb(107 147 254);
+     --accent-ring:          rgba(77, 123, 253, 0.15);
+     --icon-fill:            #c9d1e0;
+     --shadow:               0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+     --shadow-dropdown:      0 8px 32px rgba(0,0,0,.45);
+   
+     /* ── Chart ── */
+     --chart-1:              oklch(0.871 0.006 286.286);
+     --chart-2:              oklch(0.552 0.016 285.938);
+     --chart-3:              oklch(0.442 0.017 285.786);
+     --chart-4:              oklch(0.37 0.013 285.805);
+     --chart-5:              oklch(0.274 0.006 286.033);
+   
+     /* ── Sidebar ── */
+     --sidebar:                    #161b24;
+     --sidebar-foreground:         #e6eaf2;
+     --sidebar-primary:            rgb(77 123 253);
+     --sidebar-primary-foreground: #ffffff;
+     --sidebar-accent:             #2a3244;
+     --sidebar-accent-foreground:  #e6eaf2;
+     --sidebar-border:             #2a3244;
+     --sidebar-ring:               rgba(77, 123, 253, 0.3);
+   }
+   
+   
+   /* ============================================================
+      SYSTEM THEME — follows OS preference
+      ============================================================ */
+   @media (prefers-color-scheme: dark) {
+     [data-theme="system"] {
+       --background:           #0d1117;
+       --foreground:           #e6eaf2;
+       --card:                 #1c2333;
+       --card-foreground:      #e6eaf2;
+       --popover:              #1c2333;
+       --popover-foreground:   #e6eaf2;
+       --muted:                #161b24;
+       --muted-foreground:     #8b95a8;
+       --accent:               rgb(77 123 253);
+       --accent-foreground:    #ffffff;
+       --border:               #2a3244;
+       --input:                #2a3244;
+       --ring:                 rgba(77, 123, 253, 0.3);
+       --primary:              #e6eaf2;
+       --primary-foreground:   #0d1117;
+       --secondary:            #161b24;
+       --secondary-foreground: #e6eaf2;
+       --destructive:          oklch(0.704 0.191 22.216);
+       --accent-hover:         rgb(107 147 254);
+       --accent-ring:          rgba(77, 123, 253, 0.15);
+       --icon-fill:            #c9d1e0;
+       --shadow:               0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+       --shadow-dropdown:      0 8px 32px rgba(0,0,0,.45);
+       --chart-1:              oklch(0.871 0.006 286.286);
+       --chart-2:              oklch(0.552 0.016 285.938);
+       --chart-3:              oklch(0.442 0.017 285.786);
+       --chart-4:              oklch(0.37 0.013 285.805);
+       --chart-5:              oklch(0.274 0.006 286.033);
+       --sidebar:                    #161b24;
+       --sidebar-foreground:         #e6eaf2;
+       --sidebar-primary:            rgb(77 123 253);
+       --sidebar-primary-foreground: #ffffff;
+       --sidebar-accent:             #2a3244;
+       --sidebar-accent-foreground:  #e6eaf2;
+       --sidebar-border:             #2a3244;
+       --sidebar-ring:               rgba(77, 123, 253, 0.3);
+     }
+   }
+   
+   
+   /* ============================================================
+      LOGO SVG
+      ============================================================ */
+   .logo-svg {
+     fill: var(--foreground);
+     transition: fill 0.2s ease;
+   }
+   
+   
+   /* ============================================================
+      COMPONENT STYLES
+      ============================================================ */
+   
+   /* Search hover ring */
+   .search-bar:hover {
+     border-color: var(--accent);
+     box-shadow: 0 0 0 3px var(--accent-ring);
+   }
+   
+   /* Theme dropdown animation */
+   .theme-dropdown {
+     opacity: 0;
+     transform: translateY(-6px) scale(0.97);
+     pointer-events: none;
+     transition: opacity 0.15s ease, transform 0.15s ease;
+   }
+   .theme-dropdown.is-open {
+     opacity: 1;
+     transform: translateY(0) scale(1);
+     pointer-events: all;
+   }
+   
+   /* Mobile menu animation */
+   .mobile-menu {
+     transform: translateY(-8px);
+     opacity: 0;
+     pointer-events: none;
+     transition: opacity 0.18s ease, transform 0.18s ease;
+   }
+   .mobile-menu.is-open {
+     opacity: 1;
+     transform: translateY(0);
+     pointer-events: all;
+   }
+   
+   /* Active theme option */
+   .theme-option.is-active {
+     color: var(--accent);
+     background: color-mix(in srgb, var(--accent) 10%, transparent);
+   }
+   .theme-option.is-active .check-icon {
+     opacity: 1;
+   }
+   .mobile-theme-opt.is-active {
+     border-color: var(--accent);
+     color: var(--accent);
+     background: color-mix(in srgb, var(--accent) 10%, transparent);
+   }
+   
+   /* Overlay */
+   .overlay {
+     opacity: 0;
+     pointer-events: none;
+     transition: opacity 0.2s ease;
+   }
+   .overlay.is-open {
+     opacity: 1;
+     pointer-events: all;
+   }
+   
+   /* Footer social hover */
+   .footer-social:hover {
+     background: color-mix(in srgb, var(--accent) 6%, transparent);
+   }
+   
+   
+   /* ============================================================
+      SHADCN BASE LAYER — leave alone, shadcn owns this.
+      ============================================================ */
+   @layer base {
+     * {
+       @apply border-border outline-ring/50;
+     }
+     body {
+       @apply bg-background text-foreground;
+     }
+     button:not(:disabled), [role="button"]:not(:disabled) {
+       cursor: pointer;
+     }
+     html {
+       @apply font-sans;
+     }
+   }
