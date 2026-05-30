@@ -168,3 +168,7 @@
 	opacity: 1;
 	pointer-events: all;
 }
+
+.footer-social:hover {
+	background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
