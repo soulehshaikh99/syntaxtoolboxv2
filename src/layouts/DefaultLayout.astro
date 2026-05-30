@@ -6,6 +6,7 @@ import { site } from '../config/site'
 import '../styles/global.css'
 
 const gaTagId = import.meta.env.PUBLIC_GA_TAG_ID;
+const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
 const indexingConfig = import.meta.env.PUBLIC_INDEXING_CONFIG;
 
 const { title, description, keywords, schema } = Astro.props;
@@ -23,7 +24,7 @@ const { title, description, keywords, schema } = Astro.props;
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-adsense-account" content={gaTagId}>
+    <meta name="google-adsense-account" content={adsenseId}>
     <meta name="description" content={description} />
     <title>{title}</title>
     
