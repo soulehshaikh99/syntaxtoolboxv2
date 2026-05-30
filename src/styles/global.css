@@ -33,9 +33,6 @@
   --text-sm15:   0.8125rem;
   --text-base15: 0.875rem;
   --text-md:     0.9375rem;
-
-  /* Spacing */
-  --spacing-4_5: 1.125rem;
 }
 
 /* ── CSS custom properties (theming) ── */
